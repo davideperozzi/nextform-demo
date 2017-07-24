@@ -1,0 +1,115 @@
+.form-container {
+    width: 100%;
+    height: 100%;
+
+    @include display-flex;
+    @include flex-direction(row);
+    @include justify-content(center);
+    @include align-items(center);
+}
+
+.form-wrapper {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 10px;
+    background-color: rgba($color-lightgray, .3);
+
+    @include box-sizing(border-box);
+
+    form {
+        display: block;
+        width: 100%;
+
+        @include display-flex;
+        @include flex-direction(column);
+    }
+
+    .input-wrapper {
+        width: 100%;
+    }
+
+    .input-wrapper input[type="text"],
+    .input-wrapper input[type="email"],
+    .input-wrapper input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid $color-lightgray;
+        font-size: 16px;
+        font-family: $font-sans-regular;
+        background-color: $color-white;
+        color: $color-gray;
+        border-radius: 3px;
+
+        @include box-sizing(border-box);
+        @include transition(color .3s, border-color .3s);
+        @include placeholder {
+            color: $color-lightgray;
+        }
+
+        &:focus {
+            color: $color-black;
+            border-color: $color-mint;
+        }
+    }
+
+    .input-wrapper input[type="submit"] {
+        border: 1px solid $color-lightgray;
+        cursor: pointer;
+        display: inline-block;
+        width: 100%;
+        font-family: $font-sans-regular;
+        font-size: 16px;
+        background-color: $color-white;
+        color: $color-gray;
+        padding: 10px 15px;
+
+        @include transition(color .3s, border-color .3s);
+
+        &:hover {
+            color: $color-mint;
+            border-color: $color-mint;
+        }
+    }
+
+    .input-wrapper input {
+        outline: none;
+    }
+
+    .form-row:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+    .form-row:last-child {
+        border-top: 1px solid $color-lightgray;
+        padding-top: 20px;
+    }
+
+    .salutation-wrapper .input-wrapper {
+        @include display-flex;
+        @include flex-direction(row);
+
+        .radio-wrapper:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        .radio-wrapper span {
+            color: $color-gray;
+            cursor: default;
+        }
+
+        .radio-wrapper input {
+            cursor: pointer;
+        }
+    }
+
+    .group-wrapper {
+        @include display-flex;
+        @include flex-direction(row);
+
+        .input-wrapper:not(:last-child) {
+            margin-right: 20px;
+        }
+    }
+}

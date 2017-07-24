@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf8" ?>
+<form action="/validate" novalidation="true" method="post">
+    <collection name="salutation">
+        <input type="radio" name="salutation" value="m" />
+        <input type="radio" name="salutation" value="f" />
+        <validation required="true">
+            <errors>
+                <required>Please select a salutation</required>
+            </errors>
+        </validation>
+    </collection>
+    <input name="firstname" type="text" placeholder="Firstname">
+        <validation required="true" minlength="3">
+            <errors>
+                <minlength>Please enter at least %s characters</minlength>
+            </errors>
+        </validation>
+    </input>
+    <input name="lastname" type="text" placeholder="Lastname">
+        <validation required="true" minlength="3">
+            <errors>
+                <minlength>Please enter at least %s characters</minlength>
+            </errors>
+        </validation>
+    </input>
+    <input name="password" type="password" placeholder="Password">
+        <validation required="true">
+            <connections equals="content:password-submit"></connections>
+            <errors>
+                <connections>
+                    <equals>The passwords does not match</equals>
+                </connections>
+            </errors>
+        </validation>
+    </input>
+    <input name="password-submit" type="password" placeholder="Submit password">
+        <validation required="true" />
+    </input>
+    <input name="email" type="email" placeholder="Email">
+        <validation required="true" email="true">
+            <errors>
+                <required>Please enter a E-Mail address</required>
+                <email>Please enter a valid E-Mail address</email>
+            </errors>
+        </validation>
+    </input>
+    <!-- <input name="avatar" type="file">
+        <validation filetype="jpg,jpeg,png">
+            <errors>
+                <filetype>Only %s supported</filetype>
+            </errors>
+        </validation>
+    </input> -->
+    <input name="submit-register" type="submit" value="Absenden" />
+    <defaults>
+        <validation>
+            <errors>
+                <required>This field is required</required>
+            </errors>
+        </validation>
+    </defaults>
+</form>

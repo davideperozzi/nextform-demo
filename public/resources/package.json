@@ -1,0 +1,12 @@
+{
+    "name": "nextform-demo",
+    "description": "Demo for the nextform components",
+    "devDependencies": {
+        "dj-gulp-tasks": "^1.0.50",
+        "dj-library": "^1.0.61",
+        "dj-scss": "^1.0.4"
+    },
+    "main": "gulpfile.js",
+    "author": "Dorfjungs.",
+    "license": "ISC"
+}
