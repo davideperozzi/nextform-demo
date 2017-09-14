@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf8" ?>
-<form action="/validate" novalidation="true" method="post">
+<form action="/validate" novalidate="" method="post" enctype="multipart/form-data">
     <collection name="salutation">
         <input type="radio" name="salutation" value="m" />
         <input type="radio" name="salutation" value="f" />
@@ -9,6 +9,20 @@
             </errors>
         </validation>
     </collection>
+    <select name="test">
+        <options>
+            <option value="">Select one</option>
+            <option value="t1">Test 1</option>
+            <option value="t2">Test 2</option>
+            <option value="t3">Test 3</option>
+            <option value="t4">Test 4</option>
+        </options>
+        <validation required="true">
+            <errors>
+                <required>Select one!</required>
+            </errors>
+        </validation>
+    </select>
     <input name="firstname" type="text" placeholder="Firstname">
         <validation required="true" minlength="3">
             <errors>
@@ -24,17 +38,17 @@
         </validation>
     </input>
     <input name="password" type="password" placeholder="Password">
+        <validation required="true" />
+    </input>
+    <input name="password-submit" type="password" placeholder="Submit password">
         <validation required="true">
-            <connections equals="content:password-submit"></connections>
+            <connections equals="content:password"></connections>
             <errors>
                 <connections>
-                    <equals>The passwords does not match</equals>
+                    <equals>The password does not match</equals>
                 </connections>
             </errors>
         </validation>
-    </input>
-    <input name="password-submit" type="password" placeholder="Submit password">
-        <validation required="true" />
     </input>
     <input name="email" type="email" placeholder="Email">
         <validation required="true" email="true">
@@ -45,12 +59,25 @@
         </validation>
     </input>
     <!-- <input name="avatar" type="file">
-        <validation filetype="jpg,jpeg,png">
+        <validation required="true" filetype="jpg,jpeg,png">
             <errors>
+                <required>Please upload an avatar</required>
                 <filetype>Only %s supported</filetype>
             </errors>
         </validation>
     </input> -->
+    <collection name="colors">
+        <input type="checkbox" name="colors[]" value="blue" />
+        <input type="checkbox" name="colors[]" value="green" />
+        <input type="checkbox" name="colors[]" value="black" />
+        <input type="checkbox" name="colors[]" value="yellow" />
+        <validation required="true">
+            <modifiers required-min="2" required-max="3" />
+            <errors>
+                <required>Please select at least 2 and max. 3 colors</required>
+            </errors>
+        </validation>
+    </collection>
     <input name="submit-register" type="submit" value="Absenden" />
     <defaults>
         <validation>

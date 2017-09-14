@@ -5,17 +5,31 @@ namespace App\Http\Controllers;
 use Nextform\Config\XmlConfig as FormConfig;
 use Nextform\Renderer\Renderer as FormRenderer;
 use Nextform\Validation\Validation as FormValidation;
+use Nextform\Validation\CsrfToken\CsrfToken;
 
 class IndexController extends Controller
 {
+    /**
+     * @var FormConfig
+     */
+    private $formConfig;
+
+    /**
+     * @var FormValidation
+     */
+    private $formValidation;
+
     /**
      *
      */
     public function __construct()
     {
-        $this->formConfig = new FormConfig(
-            realpath(__DIR__ . '/../../../resources/config/forms/register.xml')
-        );
+        $config = realpath(__DIR__ . '/../../../resources/config/forms/index/register.xml');
+
+        $this->formConfig = new FormConfig($config);
+        $this->formValidation = new FormValidation($this->formConfig);
+
+        $this->formConfig->enableCsrfToken(true);
     }
 
     /**
@@ -33,12 +47,14 @@ class IndexController extends Controller
      */
     public function validateAction()
     {
-        $validation = new FormValidation($this->formConfig);
-
-        if (isset($_POST) && ! empty($_POST)) {
-            $validation->addData($_POST);
+        if ($this->formConfig->isCsrfTokenEnabled() && ! $this->formConfig->checkCsrfToken()) {
+            return response('', 500);
         }
 
-        return $validation->validate();
+        $this->formValidation->addData(array_merge(
+            $_GET, $_POST, $_FILES
+        ));
+
+        return $this->formValidation->validate();
     }
 }

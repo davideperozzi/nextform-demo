@@ -13,3 +13,6 @@
 
 $app->get('/', 'IndexController@indexAction');
 $app->post('/validate', 'IndexController@validateAction');
+
+$app->get('/multiple', 'MultipleController@indexAction');
+$app->post('/multiple/submit', 'MultipleController@submitAction');

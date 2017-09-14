@@ -2,7 +2,7 @@
 
 <?php
 
-$buffer = $form->render();
+$buffer = $form->render()->config(['frontend' => true]);
 
 // Wrap each input first
 $buffer->each(function($chunk){
@@ -13,15 +13,24 @@ $buffer->salutation->wrap('<div class="salutation-wrapper">%s</div>');
 $buffer->salutation->each(function($chunk){
     switch ($chunk->node->getAttribute('value')) {
         case 'm':
-            $chunk->wrap('<span>Herr</span> %s');
+            $chunk->wrap('<span>Male</span> %s');
             break;
 
         case 'f':
-            $chunk->wrap('<span>Frau</span> %s');
+            $chunk->wrap('<span>Female</span> %s');
             break;
     }
 
     $chunk->wrap('<div class="radio-wrapper">%s</div>');
+});
+
+$buffer->colors->wrap('<span class="title">Favorite colors:</span> %s');
+$buffer->colors->wrap('<div class="colors-wrapper">%s</div>');
+$buffer->colors->each(function($chunk){
+    $value = $chunk->node->getAttribute('value');
+
+    $chunk->wrap('<span>' . ucfirst($value) . '</span> %s');
+    $chunk->wrap('<div class="checkbox-wrapper">%s</div>');
 });
 
 // Group specific inputs
@@ -45,7 +54,7 @@ $buffer->each(function($chunk){
 
 @section('content')
     <div class="form-container">
-        <div class="form-wrapper">
+        <div class="form-wrapper" data-cmp="register-form">
             {!! $buffer !!}
         </div>
     </div>

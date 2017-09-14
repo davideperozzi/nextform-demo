@@ -16,6 +16,17 @@ sassc({
 	]
 });
 
+/** JavaScript tasks */
+closure.deps({
+	'prefix': '../../../../',
+	'output': './javascript/gen/application.deps.js',
+	'files': [
+		'./javascript/src/**/*.js',
+		'./node_modules/nextform-frontend/src/**/*.js',
+		'./node_modules/dj-library/**/*.js'
+	]
+});
+
 /** Task shortcuts with execution order */
-gulp.task('watch', ['dj-sassc-watch']);
+gulp.task('watch', ['dj-sassc-watch', 'dj-closure-deps-watch']);
 gulp.task('default', ['watch']);

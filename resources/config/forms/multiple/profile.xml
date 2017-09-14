@@ -1,0 +1,24 @@
+<form name="profile" method="post" novalidate="1" enctype="multipart/form-data" action="/multiple/submit">
+    <input name="firstname" type="text" placeholder="Firstname">
+        <validation required="true">
+            <errors>
+                <required>Please enter your firstname</required>
+            </errors>
+        </validation>
+    </input>
+    <input name="lastname" type="text" placeholder="Lastname">
+        <validation required="true">
+            <errors>
+                <required>Please enter your lastname</required>
+            </errors>
+        </validation>
+    </input>
+    <input name="avatar" type="file"  multiple="true">
+        <validation required="true">
+            <errors>
+                <required>Please choose an avatar</required>
+            </errors>
+        </validation>
+    </input>
+    <input type="submit" name="submit-profile" value="OK!" />
+</form>

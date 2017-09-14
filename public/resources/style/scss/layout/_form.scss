@@ -3,7 +3,7 @@
     height: 100%;
 
     @include display-flex;
-    @include flex-direction(row);
+    @include flex-direction(column);
     @include justify-content(center);
     @include align-items(center);
 }
@@ -18,7 +18,12 @@
 
     @include box-sizing(border-box);
 
+    &:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
     form {
+        position: relative;
         display: block;
         width: 100%;
 
@@ -87,9 +92,6 @@
     }
 
     .salutation-wrapper .input-wrapper {
-        @include display-flex;
-        @include flex-direction(row);
-
         .radio-wrapper:not(:last-child) {
             margin-right: 20px;
         }
@@ -104,6 +106,32 @@
         }
     }
 
+    .colors-wrapper .title {
+        color: $color-gray;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    nextform-collection {
+        @include display-inline-flex;
+        @include flex-direction(row);
+    }
+
+    .colors-wrapper .input-wrapper {
+        .checkbox-wrapper:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        .checkbox-wrapper span {
+            color: $color-gray;
+            cursor: default;
+        }
+
+        .checkbox-wrapper input {
+            cursor: pointer;
+        }
+    }
+
     .group-wrapper {
         @include display-flex;
         @include flex-direction(row);
@@ -111,5 +139,52 @@
         .input-wrapper:not(:last-child) {
             margin-right: 20px;
         }
+    }
+}
+
+.nextform-tooltip {
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+    top: 0;
+    visibility: hidden;
+
+    @include user-select(none);
+    @include perspective(500px);
+    @include transition(visibility 0s .3s);
+
+    &.visible.ready {
+        @include transition(width .2s);
+    }
+
+    &.visible {
+        visibility: visible;
+    }
+
+    .nextform-tooltip--container {
+        font-family: $font-sans-regular;
+        color: $color-white;
+        font-size: 14px;
+        background-color: #EE545A;
+        letter-spacing: 1px;
+        opacity: 0;
+
+        @include transition(opacity .3s, transform .3s);
+        @include transform(translate3d(0, 10px, 0) rotateX(-30deg));
+        @include transform-origin(50%, 0);
+
+        .nextform-tooltip--content {
+            display: inline-block;
+            padding: 15px;
+            white-space: nowrap;
+
+            @include box-sizing(border-box);
+        }
+    }
+
+    &.visible .nextform-tooltip--container {
+        opacity: 1;
+
+        @include transform(translate3d(0, 0, 0) rotateX(0deg));
     }
 }

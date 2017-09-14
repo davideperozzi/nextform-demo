@@ -1,0 +1,17 @@
+<form name="address" method="post" novalidate="1" action="/multiple/submit">
+    <input name="city" type="text" placeholder="City">
+        <validation required="true">
+            <errors>
+                <required>Please enter your firstname</required>
+            </errors>
+        </validation>
+    </input>
+    <input name="street" type="text" placeholder="Street">
+        <validation required="true">
+            <errors>
+                <required>Please enter your lastname</required>
+            </errors>
+        </validation>
+    </input>
+    <input type="submit" name="submit-address" value="OK!" />
+</form>
